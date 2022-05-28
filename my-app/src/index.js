@@ -20,7 +20,18 @@ class Square extends React.Component {
     );
   }
 }
+class Points extends React.ComponentP{
+  constructor(props){
+    super(props);
+    this.state ={
+      points : 0
+    }
+  }
+  return (){
+  <div>{this.state.points}<div/>
+  }
 
+}
 class Board extends React.Component {
     constructor(props){
         super(props);
