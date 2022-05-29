@@ -27,10 +27,9 @@ class Points extends React.ComponentP{
       points : 0
     }
   }
-  return (){
-  <div>{this.state.points}<div/>
+  render(){
+    return (<div>{this.state.points}</div>);
   }
-
 }
 class Board extends React.Component {
     constructor(props){
@@ -79,6 +78,7 @@ class Game extends React.Component {
           <Board />
         </div>
         <div className="game-info">
+          <div><Points/></div>
           <div>{/* status */}</div>
           <ol>{/* TODO */}</ol>
         </div>
