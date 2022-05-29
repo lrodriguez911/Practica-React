@@ -5,11 +5,6 @@ import './index.css';
 //import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <WorksTodo />
-  </React.StrictMode>
-); 
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
@@ -28,19 +23,20 @@ class WorksTodo extends React.Component {
     return (
         <div>
           <h3>Tareas Pendientes</h3>
-          <TodoList intems={this.state.intems}/>
-          <form onSubmit={this.handleSubmit}/>
-            <label htmlFor='new-todo'>
-              que necesito hacer?
+          <TodoList items={this.state.items}/>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="new-todo">
+              Tareas para hacer?
               </label>
-          <imput 
-          id='new-todo'
+          <input 
+          id="new-todo"
           onChange={this.handleChange}
           value={this.state.text}
           />
           <button>
             Añadir #{this.state.items.length + 1}
           </button>
+          </form>
         </div>
     )
   }
@@ -66,10 +62,12 @@ class TodoList extends React.Component {
   render(){
     return (
       <ul>
-        {this.props.items.map( i => (
-          <li key={i.id}>{i.text}</li>
+        {this.props.items.map( items => (
+          <li key={items.id}>{items.text}</li>
         ))}
       </ul>
-    )
+    );
   }
 }
+
+root.render(<WorksTodo />); 
