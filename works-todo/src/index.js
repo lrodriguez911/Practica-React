@@ -18,6 +18,7 @@ class WorksTodo extends React.Component {
     this.state = {items: [], text : ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangedelete = this.handleChangedelete.bind(this);
   }
   render(){
     return (
@@ -36,12 +37,20 @@ class WorksTodo extends React.Component {
           <button>
             Añadir #{this.state.items.length + 1}
           </button>
+          <button onClick={this.handleChangedelete}>
+            Eliminar #{this.state.items.length - 1}
+          </button>
           </form>
         </div>
     )
   }
 handleChange(e){
   this.setState({text: e.target.value});
+}
+handleChangedelete(){
+  this.setState(state => ({
+    items : state.items.pop()
+  }))
 }
 handleSubmit(e){
   e.preventDefault();
@@ -62,6 +71,7 @@ class TodoList extends React.Component {
   render(){
     return (
       <ul>
+        <li>Aqui va la lista de tareas</li>
         {this.props.items.map( items => (
           <li key={items.id}>{items.text}</li>
         ))}
