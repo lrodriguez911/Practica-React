@@ -37,9 +37,6 @@ class WorksTodo extends React.Component {
           <button>
             Añadir #{this.state.items.length + 1}
           </button>
-          <button onClick={this.handleChangedelete}>
-            Eliminar #{this.state.items.length - 1}
-          </button>
           </form>
         </div>
     )
@@ -49,20 +46,20 @@ handleChange(e){
 }
 handleChangedelete(){
   this.setState(state => ({
-    items : state.items.pop()
+    items : state.items.pop(this.items[0])
   }))
 }
 handleSubmit(e){
   e.preventDefault();
-  if(this.state.text.length === 0){
+  if(this.state.text.length === 0){ //evita que se agreguen tareas en blanco
     return;
   }
   const newItem = {
-    text: this.state.text,
+    text: this.state.text, //actualiza el text con lo q se carga en el form
     id : Date.now()
   }
   this.setState(state => ({
-    items : state.items.concat(newItem),
+    items : state.items.concat(newItem), // da la llamada para renderizar el nuevo item
     text:''
   }));
 }
@@ -72,12 +69,11 @@ class TodoList extends React.Component {
     return (
       <ul>
         <li>Aqui va la lista de tareas</li>
-        {this.props.items.map( items => (
-          <li key={items.id}>{items.text}</li>
-        ))}
+        {this.props.items.map( (items) => 
+        <li key={items.id}>{items.text} <button onChange={alert('delete')}>Eliminar</button></li>
+        )}
       </ul>
     );
   }
 }
-
 root.render(<WorksTodo />); 
