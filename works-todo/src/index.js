@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
 //import App from './App';
 //import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 //reportWebVitals();
 
-
+console.log(useState)
 class WorksTodo extends React.Component {
   constructor(props){
     super(props);
@@ -41,6 +42,7 @@ class WorksTodo extends React.Component {
         </div>
     )
   }
+
 handleChange(e){
   this.setState({text: e.target.value});
 }
