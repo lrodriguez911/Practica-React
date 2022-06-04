@@ -38,6 +38,7 @@ class WorksTodo extends React.Component {
           <button>
             Añadir #{this.state.items.length + 1}
           </button>
+          
           </form>
         </div>
     )
@@ -53,6 +54,7 @@ handleChangedelete(){
 }
 handleSubmit(e){
   e.preventDefault();
+  console.log(e)
   if(this.state.text.length === 0){ //evita que se agreguen tareas en blanco
     return;
   }
@@ -70,10 +72,12 @@ class TodoList extends React.Component {
   render(){
     return (
       <ul>
-        <li>Aqui va la lista de tareas</li>
+        <p>Aqui va la lista de tareas</p>
         {this.props.items.map( (items) => 
-        <li key={items.id}>{items.text} <button onChange={alert('delete')}>Eliminar</button></li>
-        )}
+        <li key={items.id}>{items.text}</li>)}<button onClick={() => 
+        {this.setState(this.props.items.pop()) // utilizo setState para avisar q cuando se 
+        // hace click se tiene q eliminar la prop
+          }}>Eliminar</button>
       </ul>
     );
   }
