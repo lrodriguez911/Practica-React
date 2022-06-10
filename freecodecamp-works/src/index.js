@@ -380,6 +380,13 @@ else {
     )};
   }
 };
+function MyList(){
+  const arr = ['A', 'B', 'C'];
+  const list = arr.map((a)=><li>{a}</li>);
+
+  return (<ul>{list}</ul>);
+
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.Fragment>
@@ -396,6 +403,7 @@ root.render(
     <Colorful1 />
     <MagicEightBall />
     <MyComponentConditional />
+    <MyList />
   </React.StrictMode>
   </React.Fragment>
 );
