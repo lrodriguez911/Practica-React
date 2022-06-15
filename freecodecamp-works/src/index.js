@@ -518,6 +518,123 @@ class GateKeeper extends React.Component {
     );
   }
 };
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    // add the initiated the state
+this.state ={
+  userInput : '',
+  toDoList : []
+}
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map(a => <li>{a}</li>); // using a map to renders all items
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>{items}</ul>
+      </div>
+    );
+  }
+}
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map((val, index)=> <li key={index}>{val}</li>);
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+       {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
+class MyComponentFilter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    };
+  }
+  render() {
+    const usersOnline = this.state.users.filter(a => a.online); // using filter to return array whit only users online
+    const renderOnline = usersOnline.map((val, index) => <li key={index}>{val.username}</li>);
+    //using map to return an li element whit every username
+    return (
+      <div>
+        <h1>Current Online Users:</h1>
+        <ul>{renderOnline}</ul>
+      </div>
+    );
+  }
+}
+class AppServer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+ReactDOMServer.renderToString(<AppServer />)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.Fragment>
@@ -538,6 +655,9 @@ root.render(
     <GameOfChance />
     <CheckUserAge />
     <GateKeeper />
+    <MyToDoList />
+    <Frameworks />
+    <MyComponentFilter />
   </React.StrictMode>
   </React.Fragment>
 );
