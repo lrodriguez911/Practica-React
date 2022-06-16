@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {createStore} from 'redux'
+import { Provider } from 'react-redux';
 
 //component use to change state of visibility
 class MyComponent extends React.Component {
@@ -636,6 +637,68 @@ class AppServer extends React.Component {
   }
 };
 ReactDOMServer.renderToString(<AppServer />)
+
+/* 
+const counterReducer = (state = 0, action) => {
+  const {type} = action;
+  switch (action.type) {
+    case '@counter/incremented':
+      return state +1;
+    case '@counter/decremented':
+      return state +1;
+    case '@counter/reset':
+      return state = 0;
+    default:
+      return state;
+  }
+}
+const actionIncremented = {
+  type : '@counter/incremented'
+}
+const actionDecremented = {
+  type : '@counter/decremented'
+}
+const actionReset = {
+  type : '@counter/reset'
+} 
+counterReducer(1, actionIncremented)
+counterReducer(1, actionDecremented)
+counterReducer(10, actionReset)*/
+const initialState ={
+  count : 0
+}
+
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT'
+function incrementCounter(num) {
+  return {
+    type : INCREMENT,
+    num : num
+  }
+}
+function decrementCounter(num){
+  return {
+    type : DECREMENT,
+    num: num
+  }
+}
+function reducer(state = initialState, action){
+switch (action.type) {
+  case INCREMENT:
+    return {
+      count: state.count + action.num
+    }
+    break;
+    case DECREMENT:
+      return {
+        count : state.count - action.num
+      }
+  default:
+    break;
+}
+}
+const store = store.createStore(reducer);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.Fragment>
@@ -660,32 +723,8 @@ root.render(
     <Frameworks />
     <MyComponentFilter />
   </React.StrictMode>
+  <Provider store={store}>
+    <incrementCounter/>
+  </Provider>
   </React.Fragment>
 );
-
-
-const counterReducer = (state = 0, action) => {
-  const {type} = action;
-  switch (action.type) {
-    case '@counter/incremented':
-      return state +1;
-    case '@counter/decremented':
-      return state +1;
-    case '@counter/reset':
-      return state = 0;
-    default:
-      return state;
-  }
-}
-const actionIncremented = {
-  type : '@counter/incremented'
-}
-const actionDecremented = {
-  type : '@counter/decremented'
-}
-const actionReset = {
-  type : '@counter/reset'
-}
-counterReducer(1, actionIncremented)
-counterReducer(1, actionDecremented)
-counterReducer(10, actionReset)
