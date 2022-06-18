@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import {createStore} from 'redux'
 import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 //component use to change state of visibility
 class MyComponent extends React.Component {
@@ -697,8 +698,24 @@ switch (action.type) {
     break;
 }
 }
-const store = store.createStore(reducer);
 
+const store = store.createStore(reducer);
+const contactsApp = combineReducers({
+
+  addContacts,
+
+  doSomething
+
+})
+function mapStateToProps(state) {
+  return {
+    count: state.count
+  };
+}
+const mapDispatchToProps = {
+  incrementCounter
+}
+connect(mapStateToProps, mapDispatchToProps) 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.Fragment>
