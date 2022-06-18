@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-//import App from './App.js'
 import './index.css';
-//import reportWebVitals from './reportWebVitals';
 import {useState} from 'react';
+import {createStore} from 'redux'
 
-function Contador (){
+function ContadorOnlyReact (){
   const [sta, setState] = useState(0);
 
   const handleStateinc = () =>{
@@ -22,6 +21,46 @@ function Contador (){
     }>Decrementar</button>
     <span>{sta}</span>
   </div>
+  )
+}
+
+function counterReducer(state = 0, action) {
+  switch (action.key) {
+    case caseIncremented:
+      return state + 1; 
+      break;
+    case caseDecremented:
+      return state - 1; 
+      break;
+    case caseReseted:
+      return state = 0; 
+      break;
+    default:
+      break;
+  }
+}
+const caseIncremented ={
+  type:'@counter/incremented'
+}
+const caseDecremented ={
+  type:'@counter/decremented'
+}
+const caseReseted ={
+  type:'@counter/reset'
+}
+const store = createStore(counterReducer)
+
+store.subscribe( () => {
+  console.log(store.getState())
+})
+
+store.dispatch(caseIncremented)
+
+const Contador = () => {
+  return(
+    <div>
+      {store.getState()}
+    </div>
   )
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
