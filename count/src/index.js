@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {useState} from 'react';
+//import {useState} from 'react';
 import {createStore} from 'redux'
+import {connect} from 'react-redux'
 
-function ContadorOnlyReact (){
+/* function ContadorOnlyReact (){
   const [sta, setState] = useState(0);
 
   const handleStateinc = () =>{
@@ -22,21 +23,18 @@ function ContadorOnlyReact (){
     <span>{sta}</span>
   </div>
   )
-}
+} */
 
 function counterReducer(state = 0, action) {
-  switch (action.key) {
-    case caseIncremented:
+  switch (action.type) {
+    case '@counter/incremented':
       return state + 1; 
-      break;
-    case caseDecremented:
+    case '@counter/decremented':
       return state - 1; 
-      break;
-    case caseReseted:
+    case '@counter/reset':
       return state = 0; 
-      break;
-    default:
-      break;
+    default :
+    return state;
   }
 }
 const caseIncremented ={
@@ -50,26 +48,42 @@ const caseReseted ={
 }
 const store = createStore(counterReducer)
 
-store.subscribe( () => {
-  console.log(store.getState())
-})
-
-store.dispatch(caseIncremented)
 
 const Contador = () => {
   return(
     <div>
+    <div>
       {store.getState()}
+    </div>
+    <button onClick={()=>{
+      store.dispatch(caseIncremented)
+    }}>Incrementar</button>
+    <button onClick={()=>{
+      store.dispatch(caseDecremented)
+    }}>Decrementar</button>
+    <button onClick={()=>{
+      store.dispatch(caseReseted)
+    }}>Reset</button>
     </div>
   )
 }
+function mapStateToProps(state) {
+  return {
+    count: state.count
+  };
+
+}
+connect(mapStateToProps, Contador)
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.Fragment>
-    <Contador />
-  </React.Fragment>
-    
-);
+const renderApp = () =>{
+  root.render(
+    <React.Fragment>
+      <Contador />
+    </React.Fragment>
+  );
+}
+renderApp()
+store.subscribe(renderApp)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
