@@ -5,6 +5,7 @@ import './index.css';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {connect} from 'react-redux'
+//import DisplayMessages from './DisplayMessages.js'
 
 /* function ContadorOnlyReact (){
   const [sta, setState] = useState(0);
@@ -47,7 +48,7 @@ const caseDecremented ={
 const caseReseted ={
   type:'@counter/reset'
 }
-const store = createStore(counterReducer)
+//const store = createStore(counterReducer)
 
 
 const Contador = () => {
@@ -74,15 +75,103 @@ function mapStateToProps(state) {
   };
 
 }
+// Redux:
+const ADD = 'ADD';
+
+const addMessage = (message) => {
+  return {
+    type: ADD,
+    message
+  }
+};
+
+const messageReducer = (state = [], action) => {
+  switch (action.type) {
+    case ADD:
+      return [
+        ...state,
+        action.message
+      ];
+    default:
+      return state;
+  }
+};
+
+
+
+const store = Redux.createStore(messageReducer);
+
+// React:
+
+class DisplayMessages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      messages: []
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.submitMessage = this.submitMessage.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  submitMessage() {  
+    this.setState((state) => {
+      const currentMessage = state.input;
+      return {
+        input: '',
+        messages: state.messages.concat(currentMessage)
+      };
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h2>Type in a new Message:</h2>
+        <input
+          value={this.state.input}
+          onChange={this.handleChange}/><br/>
+        <button onClick={this.submitMessage}>Submit</button>
+        <ul>
+          {this.state.messages.map( (message, idx) => {
+              return (
+                 <li key={idx}>{message}</li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    );
+  }
+};
+
+//const Provider = ReactRedux.Provider;
+
+class AppWrapper extends React.Component {
+  // Renderiza el Provider debajo de esta línea
+  render(){
+    return(
+  <Provider store={store}>
+  <DisplayMessages />
+  </Provider>
+    )
+    }
+  // Cambia el código encima de esta línea
+};
 const CounterConnect = connect(mapStateToProps)(Contador)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const renderApp = () =>{
   root.render(
     <React.Fragment>
       <Contador />
-      <Provider store={store}>
+    <Provider store={store}>
       <CounterConnect/>
     </Provider>
+    <AppWrapper/>
+    <DisplayMessages />
     </React.Fragment>
     
   );
