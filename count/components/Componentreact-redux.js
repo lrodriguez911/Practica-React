@@ -4,6 +4,7 @@ import './index.css';
 import {createStore} from 'redux'
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import { store } from 'react-redux';
 
 // Redux:
 const ADD = 'ADD';
@@ -31,14 +32,14 @@ const messageReducer = (state = [], action) => {
       ];
     case DELETE:
       return [
-        [...state.slice(0,index)],[...state].slice(index + 1)
+        [...state.slice(0,action.index)],[...state].slice(action.index + 1)
       ];
     default:
       return state;
   }
 };
 
-const store = Redux.createStore(messageReducer);
+//const store = Redux.createStore(messageReducer);
 
 // React:
 class Presentational extends React.Component {
@@ -99,8 +100,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const Provider = ReactRedux.Provider;
-const connect = ReactRedux.connect;
+//const Provider = ReactRedux.Provider;
+//const connect = ReactRedux.connect;
 
 // Define el componente Container aquí:
 const Container = connect(mapStateToProps, mapDispatchToProps)(Presentational)
