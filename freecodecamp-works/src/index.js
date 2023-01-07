@@ -2,9 +2,10 @@ import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {createStore} from 'redux'
+import {createStore} from 'redux';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import Redux from 'redux';
 
 //component use to change state of visibility
 class MyComponent extends React.Component {

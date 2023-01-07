@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 //import {useState} from 'react';
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import { createStore } from 'redux';
 import {connect} from 'react-redux'
 //import DisplayMessages from './DisplayMessages.js'
 

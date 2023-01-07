@@ -1,3 +1,14 @@
+import React, { useReducer } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import Redux from 'redux'
+
+
+
 // Redux:
 const ADD = 'ADD';
 
@@ -23,8 +34,8 @@ const messageReducer = (state = [], action) => {
 const store = Redux.createStore(messageReducer);
 
 // React:
-const Provider = ReactRedux.Provider;
-const connect = ReactRedux.connect;
+//const Provider = ReactRedux.Provider;
+//const connect = ReactRedux.connect;
 
 // Cambia el código debajo de esta línea
 class Presentational extends React.Component {
@@ -92,3 +103,7 @@ class AppWrapper extends React.Component {
     );
   }
 };
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <AppWrapper />
+)
