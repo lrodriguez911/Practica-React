@@ -20,9 +20,18 @@ html, body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 5px;
 }
 
 .logo{
   height: 150px;
+}
+.container-principal{
+  height: 550px;
+  min-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }
