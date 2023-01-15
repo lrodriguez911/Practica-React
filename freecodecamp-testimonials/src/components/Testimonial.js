@@ -1,23 +1,18 @@
 import React from "react";
+import '../stylesheets/Testimonial.css'
 
-export function Testimonial() {
+export function Testimonial(props) {
   return (
     <div className="container-testimonial">
       <img
         className="image-testimonial"
-        alt="Emma"
-        src={require("../img/Emma.png")}
+        alt={`${props.name}`}
+        src={require(`../img/${props.image}`)}
       />
       <div className="container-text-testimonial">
-        <p className="name-testimonial">Emma Bostian in Sweden</p>
-        <p className="charge-testimonial">Software Engineer at Spotify</p>
-        <p className="text-testominal">
-          "I've always struggled with learning JavaScript. I've taken many
-          courses but freeCodeCamp's course was the one which stuck. Studying
-          JavaScript as well as data structures and algorithms on freeCodeCamp
-          gave me the skills and confidence I needed to land my dream job as a
-          software engineer at Spotify."
-        </p>
+        <p className="name-testimonial"><strong>{props.name}</strong> in {props.country}</p>
+        <p className="charge-testimonial">{props.charge} at <strong>{props.company}</strong></p>
+        <p className="text-testominal">"{props.testimonial}"</p>
       </div>
     </div>
   );
