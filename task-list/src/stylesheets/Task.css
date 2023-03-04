@@ -21,8 +21,16 @@
   overflow-wrap: anywhere;
 }
 
+/* Icon */
 .task-icon{
   width: 25px;
   height: 25px;
   margin: 5px;
+}
+
+/* Task complete */
+
+.task-container .completed {
+  background-color: #189450;
+  text-decoration: line-through;
 }

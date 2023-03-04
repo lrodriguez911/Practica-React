@@ -1,6 +1,6 @@
 import "./App.css";
 import logo from "./images/logopm.png"
-import Task from "./components/Task";
+import TaskList from "./components/TaskList";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       </div>
       <div className="tasks-principal-list">
         <h1>My Tasks</h1>
-        <Task text='hola'/>
+        <TaskList />
       </div>
     </div>
   );
