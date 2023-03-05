@@ -7,15 +7,19 @@ function TaskList() {
     const [tasks, setTasks] = useState([]);
 
     const addTask = task => {
-        console.log(task);
+        if( task.text.trim()){
+            task.text = task.text.trim();
+            const tasksUpdated = [task, ...tasks]
+            setTasks(tasksUpdated)
+        }
     }
 
     return(
         <>
-         <TaskForm />
+         <TaskForm onSubmit={addTask} />
          <div className="task-list-container">
             {
-                tasks.map(task => <Task id={a} text={task.text} completed={task.completed} />)
+                tasks.map(task => <Task id={task.id} text={task.text} completed={task.completed} />)
             }
          </div>
         </>

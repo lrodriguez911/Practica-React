@@ -11,10 +11,11 @@ function TaskForm(props){
         e.preventDefault();
 
         const newTask = {
-            id: uuidv4.v4(),
+            id: uuidv4(),
             text: input,
             completed: false
         }
+        props.onSubmit(newTask)
     }
     
     return(
