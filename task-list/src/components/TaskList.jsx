@@ -17,12 +17,21 @@ function TaskList() {
         const tasksUpdated = tasks.filter(task => task.id !== id)
         setTasks(tasksUpdated);
     }
+    const completeTask = id =>{
+        const tasksUpdated = tasks.map( task => {
+            if(task.id === id){
+                task.completed = !task.completed
+            }
+            return task
+        })
+        setTasks(tasksUpdated);
+    }
     return(
         <>
          <TaskForm onSubmit={addTask} />
          <div className="task-list-container">
             {
-                tasks.map(task => <Task key={task.id} id={task.id} text={task.text} completed={task.completed} deleteTask={deleteTask}/>)
+                tasks.map(task => <Task key={task.id} id={task.id} text={task.text} completed={task.completed} deleteTask={deleteTask} completeTask={completeTask} />)
             }
          </div>
         </>
